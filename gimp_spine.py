@@ -31,8 +31,9 @@ def spine_export(img, active_layer, compression, dir_name):
     # Iterate through the layers, extracting their info into the JSON output
     # and saving the layers as individual images
     for layer in img.layers:
-        to_save = process_layer(img, layer, slots, attachments)
-        save_layers(img, to_save, compression, dir_name)
+        if layer.visible:
+            to_save = process_layer(img, layer, slots, attachments)
+            save_layers(img, to_save, compression, dir_name)
 
     # Write the JSON output
     name = os.path.splitext(os.path.basename(img.filename))[0]
